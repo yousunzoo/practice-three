@@ -4,7 +4,10 @@ export default function Home() {
   return (
     <div>
       <main>
-       <Link href='/first'>1주차</Link>
+       <div className="flex flex-col gap-4 p-5">
+        <Link href='/first'>1주차</Link>
+        <Link href='/second'>2주차</Link>
+       </div>
       </main>
     </div>
   );

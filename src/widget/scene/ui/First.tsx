@@ -1,38 +1,28 @@
 "use client";
 
-import { ThreeElements, useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import { Mesh } from "three";
+import { BasicMesh } from "@/src/features/mesh";
+import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 
-type BoxProps = ThreeElements["mesh"];
 
-export const First = (props: BoxProps) => {
-  const meshRef = useRef<Mesh>(null!);
-
-  const [hovered, setHovered] = useState(false);
-  const [clicked, setClick] = useState(false);
-
-  useFrame((state, delta) => {
-
-    if(!meshRef.current) return;
-    
-    meshRef.current.rotation.x += delta;
-    meshRef.current.rotation.y += delta;
-  });
+export const First = () => {
 
 
   return (
-    <mesh
-    {...props}
-    // @ts-ignore
-    ref={meshRef}
-    scale={clicked ? 1.5 : 1}
-    onClick={() => setClick(!clicked)}
-    onPointerOver={() => setHovered(true)}
-    onPointerOut={() => setHovered(false)}>
-      {/* args={[width, height, depth]} */}
-    <boxGeometry args={[3, 3, 3]} />
-    <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-  </mesh>
+    <Canvas camera={{position:[1,1,10]}}>
+    <ambientLight intensity={Math.PI / 2} />
+    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
+    <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+
+    <BasicMesh position={[0,0,1]} />
+
+
+    <gridHelper args={[10, 10]} />
+    <axesHelper args={[8]} />
+
+    <OrbitControls />
+  </Canvas>
+
+    
   );
 }
