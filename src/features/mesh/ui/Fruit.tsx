@@ -2,9 +2,9 @@ import * as THREE from 'three';
 
 export const Fruit = () => {
   return (
-    <group rotation={[0, Math.PI / 2, 0]}>
+    <group position={[0,1.7,0]} rotation={[0, Math.PI / 2, 0]}>
       {/* Bottom part of tangerine */}
-      <mesh position={[0, 0, 0]}>
+      <mesh position={[0, 0, 0]} castShadow receiveShadow>
         <dodecahedronGeometry args={[2, 1]} />
         <meshStandardMaterial color={0xffb84c} />
       </mesh>
